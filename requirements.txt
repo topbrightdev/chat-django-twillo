@@ -10,3 +10,4 @@ six==1.11.0
 twilio==6.9.0
 urllib3==1.22
 python-dotenv==0.7.1
+Faker==0.8.7
