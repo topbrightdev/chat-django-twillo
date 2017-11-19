@@ -15,6 +15,8 @@ def chat(request):
 
 def token(request):
     identity = request.GET.get('identity', fake.user_name()).encode('utf-8')
+    device_id = request.GET.get('device', 'default')  # unique device ID
+
     account_sid = settings.TWILIO_ACCOUNT_SID
     api_key = settings.TWILIO_API_KEY
     api_secret = settings.TWILIO_API_SECRET
@@ -22,8 +24,12 @@ def token(request):
 
     token = AccessToken(account_sid, api_key, api_secret, identity=identity)
 
+    # Create a unique endpoint ID for the device
+    endpoint = "TwilioChatDemo:{0}:{1}".format(identity, device_id)
+
     if chat_service_sid:
-        chat_grant = ChatGrant(service_sid=chat_service_sid)
+        chat_grant = ChatGrant(endpoint_id=endpoint,
+                               service_sid=chat_service_sid)
         token.add_grant(chat_grant)
 
     response = {
