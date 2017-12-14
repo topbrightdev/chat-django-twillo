@@ -29,7 +29,7 @@ load_dotenv(dotenv_path)
 SECRET_KEY = '*zoo9rafgo(e-os%ct3&2g)=zg13vgetx4==cl_=6lp67eccap'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
