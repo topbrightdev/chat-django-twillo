@@ -2,27 +2,59 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Twilio Chat Quickstart</title>
-    <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static "chat/styles/index.css" %}">
+  <title>Twilio Chat Rooms</title>
+  <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
+
 <body>
-  <header>
-    <a href="https://www.twilio.com/docs/api/chat/guides/quickstart-js"
-      target="_blank">Read the getting started guide
-        <i class="fa fa-fw fa-external-link"></i>
-      </a>
-  </header>
+  <main>
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">Twilio Chat</h1>
+        <p class="lead text-muted">An exploration into Twilio Programmable Chat. <br/> Join one of the rooms below to start your adventure</p>
+      </div>
+    </section>
+    <div class="rooms">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="card" style="width: 20rem;">
+              <div class="card-body">
+                <h4 class="card-title">General</h4>
+                <p class="card-text">Stop by and say hi! Everyone's welcome.</p>
+                <a href="/rooms/general" class="btn btn-primary">Join room</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card" style="width: 20rem;">
+              <div class="card-body">
+                <h4 class="card-title">Random</h4>
+                <p class="card-text">Random chit chat. Best place to just chill</p>
+                <a href="/rooms/random" class="btn btn-primary">Join room</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm">
+            <div class="card" style="width: 20rem;">
+              <div class="card-body">
+                <h4 class="card-title">Twilio Chat</h4>
+                <p class="card-text">Join us as we discuss everything Twilio Chat</p>
+                <a href="/rooms/twilio-chat" class="btn btn-primary">Join room</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
-  <section>
-    <div id="messages"></div>
-    <input id="chat-input" type="text" placeholder="say anything" autofocus/>
-  </section>
-
-  <script src="https://media.twiliocdn.com/sdk/js/chat/v1.0/twilio-chat.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="{% static "chat/scripts/index.js" %}"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -9,8 +9,12 @@ from twilio.jwt.access_token.grants import ChatGrant
 fake = Faker()
 
 
-def chat(request):
+def rooms(request):
     return render(request, 'chat/index.html')
+
+
+def room_detail(request, name):
+    return render(request, 'chat/room_detail.html', {'name': name})
 
 
 def token(request):

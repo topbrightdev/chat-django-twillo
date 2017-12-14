@@ -5,12 +5,10 @@ $(function() {
   // Our interface to the Chat service
   let chatClient;
 
-  // A handle to the "general" chat channel - the one and only channel we
-  // will have in this sample app
-  let generalChannel;
+  // A handle to the room's chat channel
+  let roomChannel;
 
-  // The server will assign the client a random username - store that value
-  // here
+  // The server will assign the client a random username - stored here
   let username;
 
   // Helper function to print info messages to the chat window
@@ -37,7 +35,7 @@ $(function() {
     $chatWindow.scrollTop($chatWindow[0].scrollHeight);
   }
 
-  // Alert the user they have been assigned a random username
+  // Alert the user they have been assigned a username
   print('Logging in...');
 
   // Get an access token for the current user, passing a username (identity)
@@ -61,60 +59,76 @@ $(function() {
 
       // Initialize the Chat client
       chatClient = new Twilio.Chat.Client(data.token);
-      chatClient.getSubscribedChannels().then(createOrJoinGeneralChannel);
+      chatClient.getSubscribedChannels().then(createOrJoinChannel);
     }
   );
 
-  function createOrJoinGeneralChannel() {
-    // Get the general chat channel, which is where all the messages are
-    // sent in this simple application
-    print('Attempting to join "general" chat channel...');
-    let promise = chatClient.getChannelByUniqueName('general');
+  function createOrJoinChannel() {
+    // Get the room's chat channel
+    let channelName = $('main').data('pageName');
+    if (!channelName) {
+      console.log('Channel name not found!!!');
+      return;
+    }
+    print(`Attempting to join "${channelName}" chat channel...`);
+    let promise = chatClient.getChannelByUniqueName(channelName);
     promise
       .then(function(channel) {
-        generalChannel = channel;
-        console.log('Found general channel:');
-        console.log(generalChannel);
-        setupChannel();
+        roomChannel = channel;
+        console.log('Found channel:', channelName);
+        setupChannel(channelName);
       })
       .catch(function() {
         // If it doesn't exist, let's create it
-        console.log('Creating general channel');
+        console.log(`Creating ${channelName} channel`);
         chatClient
           .createChannel({
-            uniqueName: 'general',
-            friendlyName: 'General Chat Channel'
+            uniqueName: channelName,
+            friendlyName: `${channelName} Chat Channel`
           })
           .then(function(channel) {
-            console.log('Created general channel:');
-            console.log(channel);
-            generalChannel = channel;
-            setupChannel();
+            console.log('Created channel:', channel);
+            roomChannel = channel;
+            setupChannel(channelName);
           });
       });
   }
 
+  function processPage(page) {
+    page.items.forEach(message => {
+      printMessage(message.author, message.body);
+    });
+    if (page.hasNextPage) {
+      console.log('Has next page');
+      page.nextPage().then(processPage);
+    } else {
+      console.log('Done loading messages');
+    }
+  }
+
   // Set up channel after it has been found
-  function setupChannel() {
-    // Join the general channel
-    generalChannel.join().then(function(channel) {
+  function setupChannel(name) {
+    roomChannel.join().then(function(channel) {
       print(
-        'Joined channel as ' + '<span class="me">' + username + '</span>.',
+        `Joined channel ${name} as <span class="me"> ${username} </span>.`,
         true
       );
+      channel.getMessages(30).then(processPage);
     });
 
     // Listen for new messages sent to the channel
-    generalChannel.on('messageAdded', function(message) {
+    roomChannel.on('messageAdded', function(message) {
       printMessage(message.author, message.body);
     });
   }
 
-  // Send a new message to the general channel
-  let $input = $('#chat-input');
-  $input.on('keydown', function(e) {
-    if (e.keyCode == 13 && generalChannel) {
-      generalChannel.sendMessage($input.val());
+  // Send a new message to the channel
+  let $form = $('#message-form');
+  let $input = $('#message-input');
+  $form.on('submit', function(e) {
+    e.preventDefault();
+    if (roomChannel) {
+      roomChannel.sendMessage($input.val());
       $input.val('');
     }
   });

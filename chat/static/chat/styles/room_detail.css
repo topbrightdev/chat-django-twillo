@@ -1,0 +1,70 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #f7f7f7;
+}
+
+section {
+  height: 70%;
+  position: fixed;
+  width: 800px;
+}
+
+#messages {
+  padding: 10px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+#messages p {
+  margin: 5px 0;
+  padding: 0;
+}
+
+.sidebar {
+  position: fixed;
+  right: 10px;
+  height: 100%;
+  background-color: white;
+}
+
+.info {
+  margin: 5px 0;
+  font-style: italic;
+}
+
+.message-container {
+  margin: 5px 0;
+}
+
+.message-container .username {
+  display: inline-block;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.me,
+.username.me {
+  font-weight: bold;
+  color: blue;
+}
+
+.message-container .username.me {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+#message-form {
+  padding: 10px;
+  background-color: #f7f7f7;
+  position: fixed;
+  bottom: 0;
+  width: 50%;
+}
+
+#message-input {
+  resize: none;
+}
