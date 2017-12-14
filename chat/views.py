@@ -18,7 +18,7 @@ def room_detail(request, name):
 
 
 def token(request):
-    identity = request.GET.get('identity', fake.user_name()).encode('utf-8')
+    identity = request.GET.get('identity', fake.user_name())
     device_id = request.GET.get('device', 'default')  # unique device ID
 
     account_sid = settings.TWILIO_ACCOUNT_SID
