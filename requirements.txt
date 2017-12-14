@@ -11,3 +11,7 @@ twilio==6.9.0
 urllib3==1.22
 python-dotenv==0.7.1
 Faker==0.8.7
+dj-database-url==0.4.1
+gunicorn==19.6.0
+psycopg2==2.6.2
+whitenoise==3.2
