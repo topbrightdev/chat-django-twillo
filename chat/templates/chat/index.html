@@ -2,59 +2,73 @@
 
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" />
+    <link rel="stylesheet" href="{% static "chat/styles/index.css" %}">
+    <title>Twilio Chat Rooms</title>
+  </head>
 
-<head>
-  <title>Twilio Chat Rooms</title>
-  <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-</head>
-
-<body>
-  <main>
-    <section class="jumbotron text-center">
-      <div class="container">
-        <h1 class="jumbotron-heading">Twilio Chat</h1>
-        <p class="lead text-muted">An exploration into Twilio Programmable Chat. <br/> Join one of the rooms below to start your adventure</p>
+  <body>
+    <section class="hero is-info">
+      <div class="hero-body align-center">
+        <div class="container">
+          <h1 class="title is-2">
+             Twilio Chat
+          </h1>
+          <h2 class="subtitle is-5">
+             An exploration into Twilio Programmable Chat. <br/>
+             Join one of the rooms below to start your adventure
+          </h2>
+        </div>
       </div>
     </section>
-    <div class="rooms">
+    <section class="section">
       <div class="container">
-        <div class="row">
-          <div class="col-sm">
-            <div class="card" style="width: 20rem;">
-              <div class="card-body">
-                <h4 class="card-title">General</h4>
-                <p class="card-text">Stop by and say hi! Everyone's welcome.</p>
-                <a href="/rooms/general" class="btn btn-primary">Join room</a>
+        <div class="columns">
+          <div class="column">
+            <div class="card rounded-edges">
+              <div class="card-content">
+                <p class="title is-4">General</p>
+                <div class="content">
+                  <p>
+                    Stop by and say hi! Everyone's welcome.
+                  </p>
+                  <a href="/rooms/general" class="button">Join Room</a>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-sm">
-            <div class="card" style="width: 20rem;">
-              <div class="card-body">
-                <h4 class="card-title">Random</h4>
-                <p class="card-text">Random chit chat. Best place to just chill</p>
-                <a href="/rooms/random" class="btn btn-primary">Join room</a>
+          <div class="column">
+            <div class="card rounded-edges">
+              <div class="card-content">
+                <p class="title is-4">Random</p>
+                <div class="content">
+                  <p>
+                     Random chit chat. Best place to just chill
+                  </p>
+                  <a href="/rooms/random" class="button">Join Room</a>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-sm">
-            <div class="card" style="width: 20rem;">
-              <div class="card-body">
-                <h4 class="card-title">Twilio Chat</h4>
-                <p class="card-text">Join us as we discuss everything Twilio Chat</p>
-                <a href="/rooms/twilio-chat" class="btn btn-primary">Join room</a>
+          <div class="column">
+            <div class="card rounded-edges">
+              <div class="card-content">
+                <p class="title is-4">Twilio Chat</p>
+                <div class="content">
+                  <p>
+                   Discuss everything Twilio Chat
+                  </p>
+                  <a href="/rooms/twilio-chat" class="button">Join Room</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </main>
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-</body>
-
+    </section>
+  </body>
 </html>
