@@ -28,45 +28,21 @@
     <section class="section">
       <div class="container">
         <div class="columns">
-          <div class="column">
-            <div class="card rounded-edges">
-              <div class="card-content">
-                <p class="title is-4">General</p>
-                <div class="content">
-                  <p>
-                    Stop by and say hi! Everyone's welcome.
-                  </p>
-                  <a href="/rooms/general" class="button">Join Room</a>
+          {% for room in rooms %}
+            <div class="column">
+              <div class="card rounded-edges">
+                <div class="card-content">
+                  <p class="title is-4">{{room.name}}</p>
+                  <div class="content">
+                    <p>
+                      {{room.description}}
+                    </p>
+                    <a href="/rooms/{{room.slug}}" class="button">Join Room</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="column">
-            <div class="card rounded-edges">
-              <div class="card-content">
-                <p class="title is-4">Random</p>
-                <div class="content">
-                  <p>
-                     Random chit chat. Best place to just chill
-                  </p>
-                  <a href="/rooms/random" class="button">Join Room</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <div class="card rounded-edges">
-              <div class="card-content">
-                <p class="title is-4">Twilio Chat</p>
-                <div class="content">
-                  <p>
-                   Discuss everything Twilio Chat
-                  </p>
-                  <a href="/rooms/twilio-chat" class="button">Join Room</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </section>

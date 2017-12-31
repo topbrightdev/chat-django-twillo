@@ -6,11 +6,14 @@ from faker import Faker
 from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import ChatGrant
 
+from .models import Room
+
 fake = Faker()
 
 
 def rooms(request):
-    return render(request, 'chat/index.html')
+    rooms = Room.objects.all()
+    return render(request, 'chat/index.html', {'rooms': rooms})
 
 
 def room_detail(request, name):
