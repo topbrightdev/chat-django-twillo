@@ -17,7 +17,8 @@ def rooms(request):
 
 
 def room_detail(request, name):
-    return render(request, 'chat/room_detail.html', {'name': name})
+    room = Room.objects.get(slug=name)
+    return render(request, 'chat/room_detail.html', {'room': room})
 
 
 def token(request):

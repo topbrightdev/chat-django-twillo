@@ -4,7 +4,7 @@
 <html>
 
 <head>
-  <title>{{name}} | Twilio Chat</title>
+  <title>{{room.name}} | Twilio Chat</title>
   <link rel="shortcut icon" href="//www.twilio.com/marketing/bundles/marketing/img/favicons/favicon.ico">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static "chat/styles/room_detail.css" %}">
@@ -28,9 +28,9 @@
 
         <div class="col-3 sidebar">
           <div class="float-right">
-            <h2>{{name}}</h2>
+            <h2>{{room.name}}</h2>
             <p>
-              Stop by and say hi! Everyone's welcome.
+              {{room.description}}
             </p>
           </div>
         </div>
