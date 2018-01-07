@@ -1,6 +1,6 @@
 $(function() {
   // Get handle to the chat div
-  let $chatWindow = $('#messages');
+  let $chatWindow = $("#messages");
 
   // Our interface to the Chat service
   let chatClient;
@@ -24,9 +24,9 @@ $(function() {
 
   // Helper function to print chat message to the chat window
   function printMessage(fromUser, message) {
-    let $user = $('<span class="username">').text(fromUser + ':');
+    let $user = $('<span class="username">').text(fromUser + ":");
     if (fromUser === username) {
-      $user.addClass('me');
+      $user.addClass("me");
     }
     let $message = $('<span class="message">').text(message);
     let $container = $('<div class="message-container">');
@@ -36,24 +36,24 @@ $(function() {
   }
 
   // Alert the user they have been assigned a username
-  print('Logging in...');
+  print("Logging in...");
 
   // Get an access token for the current user, passing a username (identity)
   // and a device ID - for browser-based apps, we'll always just use the
   // value "browser"
   $.getJSON(
-    '/token',
+    "/token",
     {
-      device: 'browser'
+      device: "browser"
     },
     function(data) {
       // Alert the user they have been assigned a random username
       username = data.identity;
       print(
-        'You have been assigned a random username of: ' +
+        "You have been assigned a random username of: " +
           '<span class="me">' +
           username +
-          '</span>',
+          "</span>",
         true
       );
 
@@ -65,9 +65,11 @@ $(function() {
 
   function createOrJoinChannel() {
     // Get the room's chat channel
-    let channelName = $('main').data('pageName');
+    let channelName = $("main")
+      .data("pageName")
+      .toLowerCase();
     if (!channelName) {
-      console.log('Channel name not found!!!');
+      console.log("Channel name not found!!!");
       return;
     }
     print(`Attempting to join "${channelName}" chat channel...`);
@@ -75,7 +77,7 @@ $(function() {
     promise
       .then(function(channel) {
         roomChannel = channel;
-        console.log('Found channel:', channelName);
+        console.log("Found channel:", channelName);
         setupChannel(channelName);
       })
       .catch(function() {
@@ -87,7 +89,7 @@ $(function() {
             friendlyName: `${channelName} Chat Channel`
           })
           .then(function(channel) {
-            console.log('Created channel:', channel);
+            console.log("Created channel:", channel);
             roomChannel = channel;
             setupChannel(channelName);
           });
@@ -99,10 +101,10 @@ $(function() {
       printMessage(message.author, message.body);
     });
     if (page.hasNextPage) {
-      console.log('Has next page');
+      console.log("Has next page");
       page.nextPage().then(processPage);
     } else {
-      console.log('Done loading messages');
+      console.log("Done loading messages");
     }
   }
 
@@ -117,19 +119,19 @@ $(function() {
     });
 
     // Listen for new messages sent to the channel
-    roomChannel.on('messageAdded', function(message) {
+    roomChannel.on("messageAdded", function(message) {
       printMessage(message.author, message.body);
     });
   }
 
   // Send a new message to the channel
-  let $form = $('#message-form');
-  let $input = $('#message-input');
-  $form.on('submit', function(e) {
+  let $form = $("#message-form");
+  let $input = $("#message-input");
+  $form.on("submit", function(e) {
     e.preventDefault();
     if (roomChannel) {
       roomChannel.sendMessage($input.val());
-      $input.val('');
+      $input.val("");
     }
   });
 });
