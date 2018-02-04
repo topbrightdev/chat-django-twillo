@@ -35,12 +35,8 @@ $(function() {
     $chatWindow.scrollTop($chatWindow[0].scrollHeight);
   }
 
-  // Alert the user they have been assigned a username
-  print("Logging in...");
-
   // Get an access token for the current user, passing a username (identity)
-  // and a device ID - for browser-based apps, we'll always just use the
-  // value "browser"
+  // and a device ID - for browser-based apps, we'll just use the value "browser"
   $.getJSON(
     "/token",
     {
@@ -58,23 +54,40 @@ $(function() {
       );
 
       // Initialize the Chat client
-      chatClient = new Twilio.Chat.Client(data.token);
-      chatClient.getSubscribedChannels().then(createOrJoinChannel);
+      // chatClient = new Twilio.Chat.Client(data.token);
+
+      Twilio.Chat.Client.create(data.token).then(client => {
+        // Use client
+        chatClient = client;
+        chatClient.getSubscribedChannels().then(createOrJoinChannel);
+      });
     }
   );
 
-  function createOrJoinChannel() {
-    // Get the room's chat channel
-    let channelName = $("main")
-      .data("pageName")
-      .toLowerCase();
-    if (!channelName) {
-      console.log("Channel name not found!!!");
-      return;
-    }
+  // Set up channel after it has been found
+  function setupChannel(name) {
+    roomChannel.join().then(function(channel) {
+      print(
+        `Joined channel ${name} as <span class="me"> ${username} </span>.`,
+        true
+      );
+      channel.getMessages(30).then(processPage);
+    });
+
+    // Listen for new messages sent to the channel
+    roomChannel.on("messageAdded", function(message) {
+      printMessage(message.author, message.body);
+    });
+  }
+
+  function createOrJoinChannel(channels) {
+    // Extract the room's channel name from the page URL
+    let channelName = window.location.pathname.split("/").slice(-2, -1)[0];
+
     print(`Attempting to join "${channelName}" chat channel...`);
-    let promise = chatClient.getChannelByUniqueName(channelName);
-    promise
+
+    chatClient
+      .getChannelByUniqueName(channelName)
       .then(function(channel) {
         roomChannel = channel;
         console.log("Found channel:", channelName);
@@ -106,22 +119,6 @@ $(function() {
     } else {
       console.log("Done loading messages");
     }
-  }
-
-  // Set up channel after it has been found
-  function setupChannel(name) {
-    roomChannel.join().then(function(channel) {
-      print(
-        `Joined channel ${name} as <span class="me"> ${username} </span>.`,
-        true
-      );
-      channel.getMessages(30).then(processPage);
-    });
-
-    // Listen for new messages sent to the channel
-    roomChannel.on("messageAdded", function(message) {
-      printMessage(message.author, message.body);
-    });
   }
 
   // Send a new message to the channel
