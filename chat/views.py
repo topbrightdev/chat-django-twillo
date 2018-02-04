@@ -11,13 +11,13 @@ from .models import Room
 fake = Faker()
 
 
-def rooms(request):
+def all_rooms(request):
     rooms = Room.objects.all()
     return render(request, 'chat/index.html', {'rooms': rooms})
 
 
-def room_detail(request, name):
-    room = Room.objects.get(slug=name)
+def room_detail(request, slug):
+    room = Room.objects.get(slug=slug)
     return render(request, 'chat/room_detail.html', {'room': room})
 
 
