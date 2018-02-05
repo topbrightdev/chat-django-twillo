@@ -64,7 +64,7 @@ $(function() {
     }
   );
 
-  // Set up channel after it has been found
+  // Set up channel after it has been found / created
   function setupChannel(name) {
     roomChannel.join().then(function(channel) {
       print(
@@ -78,6 +78,17 @@ $(function() {
     roomChannel.on("messageAdded", function(message) {
       printMessage(message.author, message.body);
     });
+  }
+
+  function processPage(page) {
+    page.items.forEach(message => {
+      printMessage(message.author, message.body);
+    });
+    if (page.hasNextPage) {
+      page.nextPage().then(processPage);
+    } else {
+      console.log("Done loading messages");
+    }
   }
 
   function createOrJoinChannel(channels) {
@@ -109,24 +120,12 @@ $(function() {
       });
   }
 
-  function processPage(page) {
-    page.items.forEach(message => {
-      printMessage(message.author, message.body);
-    });
-    if (page.hasNextPage) {
-      console.log("Has next page");
-      page.nextPage().then(processPage);
-    } else {
-      console.log("Done loading messages");
-    }
-  }
-
-  // Send a new message to the channel
+  // Add newly sent messages to the channel
   let $form = $("#message-form");
   let $input = $("#message-input");
   $form.on("submit", function(e) {
     e.preventDefault();
-    if (roomChannel) {
+    if (roomChannel && $input.val().trim().length > 0) {
       roomChannel.sendMessage($input.val());
       $input.val("");
     }
