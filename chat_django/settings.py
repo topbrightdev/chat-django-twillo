@@ -29,7 +29,7 @@ load_dotenv(dotenv_path)
 SECRET_KEY = '*zoo9rafgo(e-os%ct3&2g)=zg13vgetx4==cl_=6lp67eccap'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -138,7 +138,9 @@ STATIC_URL = '/static/'
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if os.environ.get('IS_HEROKU'):
+    DEBUG = False
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Twilio config
 TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', None)
