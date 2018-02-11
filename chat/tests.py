@@ -29,9 +29,9 @@ class RoomDetailTest(TestCase):
 
     def test_room_details_are_present_in_room_page(self):
         room_1 = Room.objects.create(
-            name='room 1',
-            slug='room-1',
-            description='This is the 1st room'
+            name='room X',
+            slug='room-x',
+            description='This is the X-room'
         )
 
         response = self.client.get('/rooms/{}/'.format(room_1.slug))
