@@ -1,5 +1,5 @@
 $(function() {
-  // Get handle to the chat div
+  // Reference to the chat messages area
   let $chatWindow = $("#messages");
 
   // Our interface to the Chat service
@@ -35,8 +35,8 @@ $(function() {
     $chatWindow.scrollTop($chatWindow[0].scrollHeight);
   }
 
-  // Get an access token for the current user, passing a username (identity)
-  // and a device ID - for browser-based apps, we'll just use the value "browser"
+  // Get an access token for the current user, passing a device ID
+  // for browser-based apps, we'll just use the value "browser"
   $.getJSON(
     "/token",
     {
@@ -106,14 +106,12 @@ $(function() {
       })
       .catch(function() {
         // If it doesn't exist, let's create it
-        console.log(`Creating ${channelName} channel`);
         chatClient
           .createChannel({
             uniqueName: channelName,
             friendlyName: `${channelName} Chat Channel`
           })
           .then(function(channel) {
-            console.log("Created channel:", channel);
             roomChannel = channel;
             setupChannel(channelName);
           });

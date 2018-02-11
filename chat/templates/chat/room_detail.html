@@ -11,36 +11,34 @@
 </head>
 
 <body>
-  <main>
-    <div class="container">
-      <div class="columns">
-        <div class="column is-three-quarters">
-          <section>
-            <div id="messages"></div>
-            <form id="message-form">
-              <div class="field">
-                <label class="label">Message</label>
-                <div class="control">
-                  <textarea class="textarea" id="message-input"placeholder="Your message here" rows="3" autofocus></textarea>
-                </div>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-three-quarters">
+        <section>
+          <div id="messages"></div>
+          <form id="message-form">
+            <div class="field">
+              <label class="label">Message</label>
+              <div class="control">
+                <textarea class="textarea" id="message-input"placeholder="Your message here" rows="3" autofocus></textarea>
               </div>
-              <button type="submit" class="button">Send</button>
-            </form>
-          </section>
-        </div>
-
-        <div class="column sidebar">
-          <div class="float-right">
-            <h2 class="title">{{room.name}}</h2>
-            <p class="subtitle">
-              {{room.description}}
-            </p>
-          </div>
-        </div>
-
+            </div>
+            <button type="submit" class="button">Send</button>
+          </form>
+        </section>
       </div>
+
+      <div class="column sidebar">
+        <div class="float-right">
+          <h2 class="title">{{room.name}}</h2>
+          <p class="subtitle">
+            {{room.description}}
+          </p>
+        </div>
+      </div>
+
     </div>
-  </main>
+  </div>
 
   <script src="https://media.twiliocdn.com/sdk/js/common/v0.1/twilio-common.min.js"></script>
   <script src="https://media.twiliocdn.com/sdk/js/chat/v2.0/twilio-chat.min.js"></script>

@@ -33,7 +33,7 @@ def token(request):
     token = AccessToken(account_sid, api_key, api_secret, identity=identity)
 
     # Create a unique endpoint ID for the device
-    endpoint = "TwilioChatDemo:{0}:{1}".format(identity, device_id)
+    endpoint = "MiniSlackChat:{0}:{1}".format(identity, device_id)
 
     if chat_service_sid:
         chat_grant = ChatGrant(endpoint_id=endpoint,
@@ -45,4 +45,4 @@ def token(request):
         'token': token.to_jwt().decode('utf-8')
     }
 
-    return JsonResponse(response, safe=False)
+    return JsonResponse(response)
