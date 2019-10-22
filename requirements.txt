@@ -1,6 +1,6 @@
 certifi==2017.11.5
 chardet==3.0.4
-Django==1.11.10
+Django==1.11.23
 idna==2.6
 PyJWT==1.5.3
 PySocks==1.6.7
